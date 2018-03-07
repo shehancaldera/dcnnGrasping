@@ -36,7 +36,3 @@ if writeImages
     imwrite(ycbcrImg,sprintf('%s/pcd%04dr.png',newDir,fileNum));
     end
 end
-
-%Processed Data
-sceneLabels = minRange:maxRange;
-processedImageDir = newDir;
