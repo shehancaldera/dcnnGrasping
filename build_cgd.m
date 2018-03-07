@@ -9,15 +9,15 @@ minInstance = 100;
 maxInstance = 949;
 
 %Image files
-%train_images = imageDatastore(imgDir);
-train_images = zeros(480,640,3,850);
-j=1;
-for i=100:949
-    imFile = sprintf('%s/pcd%04dr.png',imgDir,i);
-    im = double(imread(imFile));
-    
-    train_images(:,:,:,j) = im;
-end
+train_images = imageDatastore(imgDir);
+% train_images = zeros(480,640,3,850);
+% j=1;
+% for i=100:949
+%     imFile = sprintf('%s/pcd%04dr.png',imgDir,i);
+%     im = double(imread(imFile));
+%     
+%     train_images(:,:,:,j) = im;
+% end
 
 %Bounding Boxes
 bboxes = zeros(850,8);
@@ -50,4 +50,8 @@ end
 %img = readimage(images,2);
 
 %Result: Data for the training -> train_images, train_grasps
+
+train_data = table(train_images.Files, train_grasps);
+train_data.Properties.VariableNames{'Var1'} = 'Image';
+train_data.Properties.VariableNames{'Var2'} = 'Grasp_x_y_h_w_theta';
 

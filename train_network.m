@@ -1,11 +1,11 @@
 layers = [ ...
-    imageInputLayer([480 640 3])
+    imageInputLayer([224 224 3])
     convolution2dLayer(12,25)
     reluLayer
     fullyConnectedLayer(5)
     regressionLayer];
 
 options = trainingOptions('sgdm','InitialLearnRate',0.001, ...
-    'MaxEpochs',50);
+    'MaxEpochs',2, 'MiniBatchSize',4);
 
-net = trainNetwork(train_images,train_grasps,layers,options)
+net = trainNetwork(train_data,layers,options)

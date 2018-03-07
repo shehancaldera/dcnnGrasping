@@ -15,7 +15,7 @@ maxRange = 949;
 newDir = sprintf('%s/processedImages',dataDir);
 mkdir(newDir);
 
-writeImages = false;
+writeImages = true;
 
 if writeImages
     for fileNum=minRange:maxRange
@@ -32,6 +32,8 @@ if writeImages
     ycbcrImg =rgb2ycbcr(I);
     D = (D-min(D))./max(D)*255;
     ycbcrImg(:,:,1) = D';
+    ycbcrImg = imcrop(ycbcrImg,[150 70 340 340]);
+    ycbcrImg = imresize(ycbcrImg,[224 224]);
     
     imwrite(ycbcrImg,sprintf('%s/pcd%04dr.png',newDir,fileNum));
     end
